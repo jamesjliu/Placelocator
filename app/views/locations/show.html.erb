@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @location.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= @location.address %>
+</p>
+
+<img src="https://maps.googleapis.com/maps/api/staticmap?center=<%= @location.address %>&size=400x400">
+
+<h3>Nearby Locations</h3>
+
+<% @nearbylocations =@location.nearbys(20) %>
+<ul>
+<% @nearbylocations.each do |location| %>
+  <li><%= location.name %> - <%=location.distance.round(2)%> miles</li>
+  
+<%end%>
+
+</ul>
+
+<%= link_to 'Edit', edit_location_path(@location) %> |
+<%= link_to 'Back', locations_path %>
